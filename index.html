@@ -65,10 +65,13 @@
             lastTime = now;
             document.getElementById("shakeImage").classList.add("shake");
             setTimeout(() => {
+                sessionStorage.setItem("fromIndex", "true");
+                localStorage.removeItem("fortuneResult");
                 window.location.href = "result.html";
             }, 2000); 
         }
         }
     </script>
 </body>
+
 </html>
