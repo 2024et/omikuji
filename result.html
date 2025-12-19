@@ -20,6 +20,10 @@
     </div>
 
     <script>
+        //index.htmlから入ってない場合はindex.htmlへ強制遷移
+        if (!sessionStorage.getItem("fromIndex")) {
+            location.href = "index.html";
+        }
         const fortunes = ["大大吉！！\n[恋愛]：心が通じ合う奇跡的な出会いが訪れる！\n[健康]：エネルギーに満ち、多少の無理も乗り越えられる年！\n[学問]：挑戦してきたことが評価され、大きく飛躍できる。\n[金運]：思い切った決断が豊かさを呼び込む！",
 
         "大大吉！！\n[恋愛]：長く続くご縁が始まる予感。\n[健康]：心身ともに安定し、充実感を得られる一年。\n[学問]：努力以上の成果を実感できる年。\n[金運]：チャンスを掴むことで大きな実りがある。",
@@ -72,13 +76,12 @@
 
         let result;
 
-        //通常アクセス時のみ結果を算出しリロード時は結果を変更しない
-        if (!sessionStorage.getItem("fortuneGenerated")) {
-        result = fortunes[Math.floor(Math.random() * fortunes.length)];
-        sessionStorage.setItem("fortuneGenerated", result);
-        } else {
-        result = sessionStorage.getItem("fortuneGenerated");
+        // 初回表示のみ実施
+        if (!result) {
+            result = fortunes[Math.floor(Math.random() * fortunes.length)];
+            sessionStorage.setItem("fortuneResult", result);
         }
+        sessionStorage.removeItem("fromIndex");
 
         //タイトルのみspanタグ化
         result = result.replace(
@@ -132,4 +135,5 @@
         });
 </script>
 </body>
+
 </html>
